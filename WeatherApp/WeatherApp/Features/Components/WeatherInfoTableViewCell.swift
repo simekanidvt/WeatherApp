@@ -16,7 +16,7 @@ class WeatherInfoTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-   static func nib() ->UINib{
+   static func nib() -> UINib {
         return UINib( nibName:"WeatherInfoTableViewCell", bundle: nil)
     }
 
