@@ -28,6 +28,12 @@ struct Coord : Codable {
 // MARK: - Main
 struct Main : Codable {
     var temp, tempMin, tempMax: Double?
+    
+    enum CodingKeys: String, CodingKey{
+        case tempMin = "temp_min"
+        case tempMax = "temp_max"
+        case temp 
+    }
 }
 
 // MARK: - Weather

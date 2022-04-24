@@ -130,6 +130,11 @@
                     </view>
                     <connections>
                         <outlet property="futureForcastTableView" destination="Z5z-r0-MZy" id="IDl-yu-Oma"/>
+                        <outlet property="largeCurrentTempLabel" destination="Q6T-9a-BR0" id="DqF-Yq-uxC"/>
+                        <outlet property="maxTempLabel" destination="UGq-ip-sS3" id="AtE-0y-UWg"/>
+                        <outlet property="minTempLabel" destination="HhL-oK-yOs" id="OV0-do-7MK"/>
+                        <outlet property="smallCurrentTempLabel" destination="SWk-VJ-sX6" id="9A1-hf-xrX"/>
+                        <outlet property="weatherDescriptionLabel" destination="HV9-1A-kmC" id="3W6-3R-5cn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

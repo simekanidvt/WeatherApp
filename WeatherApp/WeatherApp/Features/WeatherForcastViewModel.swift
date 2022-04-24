@@ -11,6 +11,7 @@ import CoreLocation
 protocol WeatherForcastDelegate {
     func reloadTableview()
     func showError()
+    func populateCurrentWeather()
 }
 
 class WeatherForcastViewModel {
@@ -28,7 +29,7 @@ class WeatherForcastViewModel {
         self.location = location
     }
     
-    func getCurrentWeather() {
+    func retrieveCurrentWeatherFromAPI() {
         
         guard let location =  self.location else {
             delegate.showError()
@@ -40,12 +41,21 @@ class WeatherForcastViewModel {
         
         repository.fetchCurrentWeather(longitude: latitude, latitude: longitude, completion: { [weak self] result in
             switch result {
-            case .success(let currentWeather):
+            case .success(let currentWeather) :
                 self?.currentWeather = currentWeather
-                print(currentWeather)
+                self?.delegate.populateCurrentWeather()
             case .failure(let error):
                 self?.delegate.showError()
             }
         })
     }
+    
+    func currentWeatherData () -> CurrentWeatherModel? {
+        return self.currentWeather
+    }
+    
+    func convertKalvinToCelcics(temperature:Double) -> String {
+        String(format: "%.0f", temperature - 273.15)+"°"
+    }
 }
+    
