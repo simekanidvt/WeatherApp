@@ -15,6 +15,7 @@ class WeatherForcastViewController: UIViewController {
     @IBOutlet weak var maxTempLabel: UILabel!
     @IBOutlet weak var minTempLabel: UILabel!
     @IBOutlet weak var futureForcastTableView: UITableView!
+    @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var weatherDescriptionLabel: UILabel!
     
     let manager  = CLLocationManager()
@@ -30,6 +31,9 @@ class WeatherForcastViewController: UIViewController {
         manager.delegate = self
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
+        self.view.backgroundColor = Theme.currentTheme.sunnyColour
+        self.image.image = Theme.currentTheme.sunnyImage
+        self.futureForcastTableView
     }
 }
 
@@ -54,6 +58,7 @@ extension WeatherForcastViewController: CLLocationManagerDelegate {
             manager.startUpdatingLocation()
             viewModel.setLocation(location: location)
             viewModel.retrieveCurrentWeatherFromAPI()
+            image.image = Theme.currentTheme.sunnyImage
             
         }
     }
