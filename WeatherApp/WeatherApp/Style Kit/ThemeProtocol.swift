@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class Theme {
-    static var currentTheme:ThemeProtocol = SeaTheme()
+    static var currentTheme:ThemeProtocol = ForestTheme()
 }
 
 protocol ThemeProtocol {

@@ -17,7 +17,8 @@ class WeatherForcastViewController: UIViewController {
     @IBOutlet weak var futureForcastTableView: UITableView!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var weatherDescriptionLabel: UILabel!
-    
+
+    @IBOutlet weak var toggleThemButton: UIButton!
     let manager  = CLLocationManager()
     
     lazy var viewModel = WeatherForcastViewModel(repository: WeatherForcastRepository(), delegate: self)
@@ -33,8 +34,23 @@ class WeatherForcastViewController: UIViewController {
         manager.startUpdatingLocation()
         self.view.backgroundColor = Theme.currentTheme.sunnyColour
         self.image.image = Theme.currentTheme.sunnyImage
-        self.futureForcastTableView
+
     }
+  
+    @IBAction func tapped(_ sender: UISwitch) {
+        
+        if (sender.isOn){
+            Theme.currentTheme = ForestTheme()
+            self.view.backgroundColor = Theme.currentTheme.sunnyColour
+            self.image.image = Theme.currentTheme.sunnyImage
+        }
+        
+        else {
+            Theme.currentTheme = SeaTheme()
+            self.view.backgroundColor = Theme.currentTheme.sunnyColour
+            self.image.image = Theme.currentTheme.sunnyImage
+        }
+    } 
 }
 
 extension WeatherForcastViewController : UITableViewDataSource {
