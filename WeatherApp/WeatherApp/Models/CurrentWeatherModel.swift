@@ -8,33 +8,30 @@
 import Foundation
 
 // MARK: - CurrentWeatherModel
-struct CurrentWeatherModel :Codable {
-    let coord: Coord
-    let weather: [Weather]
-    let base: String
-    let main: Main
-    let visibility: Int
-    let dt: Int
-    let timezone, id: Int
-    let name: String
-    let cod: Int
+struct CurrentWeatherModel : Codable {
+    var coord: Coord?
+    var weather: [Weather]?
+    var base: String?
+    var main: Main?
+    var visibility: Int?
+    var dt: Int?
+    var timezone, id: Int?
+    var name: String?
+    var cod: Int?
 }
 
 // MARK: - Coord
-struct Coord : Codable{
-    let lon, lat: Int
+struct Coord : Codable {
+    var lon, lat: Int?
 }
 
 // MARK: - Main
-struct Main : Codable{
-    let temp, tempMin, tempMax: Double
+struct Main : Codable {
+    var temp, tempMin, tempMax: Double?
 }
-
 
 // MARK: - Weather
 struct Weather: Codable {
-    let id: Int
-    let main, weatherDescription, icon: String
+    var id: Int?
+    var main, weatherDescription, icon: String?
 }
-
-

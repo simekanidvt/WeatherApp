@@ -13,7 +13,7 @@ class WeatherForcastViewController: UIViewController {
     @IBOutlet weak var futureForcastTableView: UITableView!
     let manager  = CLLocationManager()
     
-    let viewModel = WeatherForcastViewModel()
+    lazy var viewModel = WeatherForcastViewModel(repository: WeatherForcastRepository(), delegate: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,6 @@ class WeatherForcastViewController: UIViewController {
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
     }
-    
 }
 
 extension WeatherForcastViewController : UITableViewDataSource {
@@ -47,6 +46,17 @@ extension WeatherForcastViewController: CLLocationManagerDelegate {
         if let location = locations.first {
             manager.startUpdatingLocation()
             viewModel.setLocation(location: location)
+            viewModel.getCurrentWeather()
         }
+    }
+}
+
+extension WeatherForcastViewController: WeatherForcastDelegate {
+    func reloadTableview() {
+        // NOthing for now
+    }
+    
+    func showError() {
+        // Nothing for now
     }
 }

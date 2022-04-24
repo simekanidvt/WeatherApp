@@ -107,9 +107,7 @@ extension URLSession {
                         completion(.failure(CustomError.invalidData))
                     }
                 }
-                
             }
-        
             apiTask.resume()
             
         } catch CustomError.invalidBody {
@@ -121,7 +119,6 @@ extension URLSession {
             DispatchQueue.main.async {
                 completion(.failure(.internalServerError))
             }
-            
         }
     }
 }

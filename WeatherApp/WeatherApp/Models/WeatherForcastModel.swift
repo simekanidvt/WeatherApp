@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct WeatherForcastModel:Codable{
+struct WeatherForcastModel : Codable {
     
 }
