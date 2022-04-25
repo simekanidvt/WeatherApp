@@ -28,7 +28,6 @@ class WeatherForcastViewController: UIViewController {
         tableViewSetUp()
         locationManagerSetUp()
         reloadTheme()
-        
     }
     
     private func tableViewSetUp() {
@@ -36,6 +35,7 @@ class WeatherForcastViewController: UIViewController {
         futureForcastTableView.register( WeatherInfoTableViewCell.nib(),
                                          forCellReuseIdentifier: WeatherInfoTableViewCell.identifier)
     }
+    
     private func locationManagerSetUp() {
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.delegate = self
@@ -47,7 +47,7 @@ class WeatherForcastViewController: UIViewController {
         
         let weather = weatherDescriptionLabel.text
         
-        switch(weather){
+        switch(weather) {
         case "Clouds":
             self.view.backgroundColor = Theme.currentTheme.cloudyColour
             self.image.image = Theme.currentTheme.cloudyImage
@@ -71,8 +71,7 @@ class WeatherForcastViewController: UIViewController {
     @IBAction private func tapped(_ sender: UISwitch) {
         if (sender.isOn) {
             Theme.currentTheme = ForestTheme()
-        }
-        else {
+        } else {
             Theme.currentTheme = SeaTheme()
         }
         reloadTheme()
