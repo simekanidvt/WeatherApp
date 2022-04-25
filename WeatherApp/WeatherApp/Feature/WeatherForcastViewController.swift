@@ -10,14 +10,14 @@ import CoreLocation
 
 class WeatherForcastViewController: UIViewController {
     
-    @IBOutlet weak var largeCurrentTempLabel: UILabel!
-    @IBOutlet weak var smallCurrentTempLabel: UILabel!
-    @IBOutlet weak var maxTempLabel: UILabel!
-    @IBOutlet weak var minTempLabel: UILabel!
-    @IBOutlet weak var futureForcastTableView: UITableView!
-    @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var weatherDescriptionLabel: UILabel!
-
+    @IBOutlet private weak var largeCurrentTempLabel: UILabel!
+    @IBOutlet private weak var smallCurrentTempLabel: UILabel!
+    @IBOutlet private weak var maxTempLabel: UILabel!
+    @IBOutlet private weak var minTempLabel: UILabel!
+    @IBOutlet private weak var futureForcastTableView: UITableView!
+    @IBOutlet private weak var image: UIImageView!
+    @IBOutlet private weak var weatherDescriptionLabel: UILabel!
+    
     @IBOutlet weak var toggleThemButton: UIButton!
     let manager  = CLLocationManager()
     
@@ -25,32 +25,58 @@ class WeatherForcastViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableViewSetUp()
+        locationManagerSetUp()
+        reloadTheme()
+        
+    }
+    
+    private func tableViewSetUp() {
         futureForcastTableView.dataSource = self
         futureForcastTableView.register( WeatherInfoTableViewCell.nib(),
                                          forCellReuseIdentifier: WeatherInfoTableViewCell.identifier)
+    }
+    private func locationManagerSetUp() {
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.delegate = self
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
-        self.view.backgroundColor = Theme.currentTheme.sunnyColour
-        self.image.image = Theme.currentTheme.sunnyImage
-
     }
-  
-    @IBAction func tapped(_ sender: UISwitch) {
+    
+    private func reloadTheme() {
         
-        if (sender.isOn){
-            Theme.currentTheme = ForestTheme()
+        let weather = weatherDescriptionLabel.text
+        
+        switch(weather){
+        case "Clouds":
+            self.view.backgroundColor = Theme.currentTheme.cloudyColour
+            self.image.image = Theme.currentTheme.cloudyImage
+           
+        case "Clear":
             self.view.backgroundColor = Theme.currentTheme.sunnyColour
             self.image.image = Theme.currentTheme.sunnyImage
+          
+        case "Rain":
+            self.view.backgroundColor = Theme.currentTheme.rainyColour
+            self.image.image = Theme.currentTheme.rainyImage
+        case .none:
+            self.view.backgroundColor = Theme.currentTheme.cloudyColour
+            self.image.image = Theme.currentTheme.cloudyImage
+        case .some(_):
+            self.view.backgroundColor = Theme.currentTheme.cloudyColour
+            self.image.image = Theme.currentTheme.cloudyImage
         }
-        
+    }
+    
+    @IBAction private func tapped(_ sender: UISwitch) {
+        if (sender.isOn) {
+            Theme.currentTheme = ForestTheme()
+        }
         else {
             Theme.currentTheme = SeaTheme()
-            self.view.backgroundColor = Theme.currentTheme.sunnyColour
-            self.image.image = Theme.currentTheme.sunnyImage
         }
-    } 
+        reloadTheme()
+    }
 }
 
 extension WeatherForcastViewController : UITableViewDataSource {
@@ -74,7 +100,7 @@ extension WeatherForcastViewController: CLLocationManagerDelegate {
             manager.startUpdatingLocation()
             viewModel.setLocation(location: location)
             viewModel.retrieveCurrentWeatherFromAPI()
-            image.image = Theme.currentTheme.sunnyImage
+            reloadTheme()
             
         }
     }
@@ -105,6 +131,7 @@ extension WeatherForcastViewController: WeatherForcastDelegate {
             self.minTempLabel.text = self.viewModel.convertKalvinToCelcics(temperature: minTemp)
             self.maxTempLabel.text = self.viewModel.convertKalvinToCelcics(temperature: maxTemp)
             self.weatherDescriptionLabel.text = description
+            self.reloadTheme()
         }
     }
 }

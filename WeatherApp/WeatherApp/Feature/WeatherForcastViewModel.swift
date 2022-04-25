@@ -39,7 +39,7 @@ class WeatherForcastViewModel {
         let longitude = String(Int(location.coordinate.longitude))
         let latitude = String(Int(location.coordinate.latitude))
         
-        repository.fetchCurrentWeather(longitude: latitude, latitude: longitude, completion: { [weak self] result in
+        repository.fetchCurrentWeather(longitude: longitude, latitude: latitude, completion: { [weak self] result in
             switch result {
             case .success(let currentWeather) :
                 self?.currentWeather = currentWeather
