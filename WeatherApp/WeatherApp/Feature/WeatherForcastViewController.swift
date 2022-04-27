@@ -27,6 +27,8 @@ class WeatherForcastViewController: UIViewController {
         super.viewDidLoad()
         tableViewSetUp()
         locationManagerSetUp()
+        viewModel.retrieveCurrentWeatherFromAPI()
+        viewModel.retrieveWeatherForcastFromAPI()
         reloadTheme()
     }
     
@@ -51,11 +53,11 @@ class WeatherForcastViewController: UIViewController {
         case "Clouds":
             self.view.backgroundColor = Theme.currentTheme.cloudyColour
             self.image.image = Theme.currentTheme.cloudyImage
-           
+            
         case "Clear":
             self.view.backgroundColor = Theme.currentTheme.sunnyColour
             self.image.image = Theme.currentTheme.sunnyImage
-          
+            
         case "Rain":
             self.view.backgroundColor = Theme.currentTheme.rainyColour
             self.image.image = Theme.currentTheme.rainyImage
@@ -95,10 +97,10 @@ extension WeatherForcastViewController : UITableViewDataSource {
 extension WeatherForcastViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            
             manager.startUpdatingLocation()
             viewModel.setLocation(location: location)
             viewModel.retrieveCurrentWeatherFromAPI()
+            viewModel.retrieveWeatherForcastFromAPI()
             reloadTheme()
             
         }
@@ -106,6 +108,10 @@ extension WeatherForcastViewController: CLLocationManagerDelegate {
 }
 
 extension WeatherForcastViewController: WeatherForcastDelegate {
+    func populateWeatherForcast() {
+        //
+    }
+    
     func reloadTableview() {
         // NOthing for now
     }
@@ -125,12 +131,11 @@ extension WeatherForcastViewController: WeatherForcastDelegate {
             return
         }
         
-        DispatchQueue.main.async {
-            self.largeCurrentTempLabel.text = self.viewModel.convertKalvinToCelcics(temperature: temp)
-            self.minTempLabel.text = self.viewModel.convertKalvinToCelcics(temperature: minTemp)
-            self.maxTempLabel.text = self.viewModel.convertKalvinToCelcics(temperature: maxTemp)
-            self.weatherDescriptionLabel.text = description
-            self.reloadTheme()
-        }
+        self.largeCurrentTempLabel.text = self.viewModel.convertKalvinToCelcics(temperature: temp)
+        self.minTempLabel.text = self.viewModel.convertKalvinToCelcics(temperature: minTemp)
+        self.maxTempLabel.text = self.viewModel.convertKalvinToCelcics(temperature: maxTemp)
+        self.weatherDescriptionLabel.text = description
+        self.reloadTheme()
+        
     }
 }

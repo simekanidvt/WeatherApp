@@ -28,6 +28,11 @@ class WeatherForcastRepository: WeatherForcastReposirotyType {
     }
     
     func fetchWeatherForcast(longitude: String, latitude: String,completion: @escaping WeatherForcastResult){
+        let url = Constants.baseURL+"data/2.5/forecast?cnt=5&lat="+latitude+"&lon="+longitude+"&appid="+Constants.apiKey
         
+        URLSession.shared.makeRequest(url: URL(string: url),
+                                      method: .get,
+                                      returnModel: WeatherForcastModel.self,
+                                      completion: completion)
     }
 }

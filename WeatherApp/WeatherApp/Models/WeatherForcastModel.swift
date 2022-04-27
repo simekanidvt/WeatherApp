@@ -6,7 +6,33 @@
 //
 
 import Foundation
+struct WeatherForcastModel: Codable {
+    var cod: String?
+    var message, cnt: Int?
+    var list: [List]?
 
-struct WeatherForcastModel : Codable {
-    
+}
+
+// MARK: - Coord
+struct ForcastCoord: Codable {
+    var lat, lon: Int?
+}
+
+// MARK: - List
+struct List : Codable {
+    var dt: Int?
+    var main: ForcastMain?
+    var weather: [WeatherForcastModel]?
+}
+
+// MARK: - Cloud
+// MARK: - Main
+struct ForcastMain: Codable {
+    var temp: Double?
+}
+
+// MARK: - Weather
+struct ForcastWeather: Codable {
+    var id: Int?
+    var main, icon: String?
 }
