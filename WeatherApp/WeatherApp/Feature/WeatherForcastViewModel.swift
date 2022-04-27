@@ -13,14 +13,20 @@ protocol WeatherForcastDelegate {
     func showError()
     func populateCurrentWeather()
     func populateWeatherForcast()
+    func reloadTheme()
+    func applyForestTheme()
+    func applySeaTheme()
+    
 }
 
 class WeatherForcastViewModel {
+    
     private var  location: CLLocation?
     private var currentWeather: CurrentWeatherModel?
     private let repository: WeatherForcastRepository
     private let delegate:WeatherForcastDelegate
     private var weatherForcast: WeatherForcastModel?
+    
     init(repository: WeatherForcastRepository, delegate: WeatherForcastDelegate) {
         self.repository = repository
         self.delegate = delegate
@@ -28,6 +34,15 @@ class WeatherForcastViewModel {
     
     func setLocation(location: CLLocation) {
         self.location = location
+    }
+    
+    func toggleTheme(isForest:Bool){
+        if (isForest) {
+            Theme.currentTheme = ForestTheme()
+        } else {
+            Theme.currentTheme = SeaTheme()
+        }
+        delegate.reloadTheme()
     }
     
     func retrieveCurrentWeatherFromAPI() {
@@ -44,6 +59,7 @@ class WeatherForcastViewModel {
             case .success(let currentWeather) :
                 self?.currentWeather = currentWeather
                 self?.delegate.populateCurrentWeather()
+                self?.delegate.reloadTheme()
             case .failure(let error):
                 self?.delegate.showError()
             }
@@ -61,9 +77,10 @@ class WeatherForcastViewModel {
         
         repository.fetchWeatherForcast(longitude: longitude, latitude: latitude, completion: { [weak self] result in
             switch result {
-            case .success(let currentWeather) :
-                self?.weatherForcast = currentWeather
+            case .success(let weatherForcastData) :
+                self?.weatherForcast = weatherForcastData
                 self?.delegate.populateWeatherForcast()
+                self?.delegate.reloadTheme()
             case .failure(let error):
                 self?.delegate.showError()
             }
@@ -78,5 +95,5 @@ class WeatherForcastViewModel {
         String(format: "%.0f", temperature - 273.15)+"°"
     }
 }
-    
+
 

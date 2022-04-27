@@ -29,7 +29,6 @@ class WeatherForcastViewController: UIViewController {
         locationManagerSetUp()
         viewModel.retrieveCurrentWeatherFromAPI()
         viewModel.retrieveWeatherForcastFromAPI()
-        reloadTheme()
     }
     
     private func tableViewSetUp() {
@@ -45,38 +44,10 @@ class WeatherForcastViewController: UIViewController {
         manager.startUpdatingLocation()
     }
     
-    private func reloadTheme() {
-        
-        let weather = weatherDescriptionLabel.text
-        
-        switch(weather) {
-        case "Clouds":
-            self.view.backgroundColor = Theme.currentTheme.cloudyColour
-            self.image.image = Theme.currentTheme.cloudyImage
-            
-        case "Clear":
-            self.view.backgroundColor = Theme.currentTheme.sunnyColour
-            self.image.image = Theme.currentTheme.sunnyImage
-            
-        case "Rain":
-            self.view.backgroundColor = Theme.currentTheme.rainyColour
-            self.image.image = Theme.currentTheme.rainyImage
-        case .none:
-            self.view.backgroundColor = Theme.currentTheme.cloudyColour
-            self.image.image = Theme.currentTheme.cloudyImage
-        case .some(_):
-            self.view.backgroundColor = Theme.currentTheme.cloudyColour
-            self.image.image = Theme.currentTheme.cloudyImage
-        }
-    }
+
     
     @IBAction private func tapped(_ sender: UISwitch) {
-        if (sender.isOn) {
-            Theme.currentTheme = ForestTheme()
-        } else {
-            Theme.currentTheme = SeaTheme()
-        }
-        reloadTheme()
+        viewModel.toggleTheme(isForest: sender.isOn)
     }
 }
 
@@ -108,6 +79,31 @@ extension WeatherForcastViewController: CLLocationManagerDelegate {
 }
 
 extension WeatherForcastViewController: WeatherForcastDelegate {
+    
+     func reloadTheme() {
+        
+        let weather = weatherDescriptionLabel.text
+        
+        switch(weather) {
+        case "Clouds":
+            self.view.backgroundColor = Theme.currentTheme.cloudyColour
+            self.image.image = Theme.currentTheme.cloudyImage
+            
+        case "Clear":
+            self.view.backgroundColor = Theme.currentTheme.sunnyColour
+            self.image.image = Theme.currentTheme.sunnyImage
+            
+        case "Rain":
+            self.view.backgroundColor = Theme.currentTheme.rainyColour
+            self.image.image = Theme.currentTheme.rainyImage
+        case .none:
+            self.view.backgroundColor = Theme.currentTheme.cloudyColour
+            self.image.image = Theme.currentTheme.cloudyImage
+        case .some(_):
+            self.view.backgroundColor = Theme.currentTheme.cloudyColour
+            self.image.image = Theme.currentTheme.cloudyImage
+        }
+    }
     func populateWeatherForcast() {
         //
     }
