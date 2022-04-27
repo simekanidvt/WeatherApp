@@ -59,6 +59,9 @@ extension WeatherForcastViewController : UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: WeatherInfoTableViewCell.identifier)  as? WeatherInfoTableViewCell else {
             return UITableViewCell()
         }
+        
+        let forcastData = viewModel.weatherForcastData(index: indexPath.item)
+        cell.setCellProperties(dayOfWeekLabel: forcastData.dayOfWeek, weatherImage: UIImage(), temprature: forcastData.temperature)
         return cell
     }
 }
@@ -92,11 +95,11 @@ extension WeatherForcastViewController: WeatherForcastDelegate {
     }
     
     func populateWeatherForcast() {
-        //
+     
     }
     
     func reloadTableview() {
-        // NOthing for now
+        self.futureForcastTableView.reloadData()
     }
     
     func showError() {

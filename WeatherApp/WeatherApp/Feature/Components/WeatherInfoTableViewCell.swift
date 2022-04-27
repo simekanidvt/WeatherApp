@@ -18,6 +18,7 @@ class WeatherInfoTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
     }
     
    static func nib() -> UINib {

@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import UIKit
 
 protocol WeatherForcastDelegate {
     func reloadTableview()
@@ -19,6 +20,10 @@ protocol WeatherForcastDelegate {
 }
 
 class WeatherForcastViewModel {
+    
+    let daysOfTheWeek = ["Monday",  "Tuesday",
+                         "Wednesday", "Thursday",
+                         "Friday", "Saturday", "Sunday"]
     
     private var  location: CLLocation?
     private var currentWeather: CurrentWeatherModel?
@@ -94,6 +99,7 @@ class WeatherForcastViewModel {
             case .success(let weatherForcastData) :
                 self?.weatherForcast = weatherForcastData
                 self?.delegate.populateWeatherForcast()
+                self?.delegate.reloadTableview()
             case .failure(let error):
                 self?.delegate.showError()
             }
@@ -102,6 +108,26 @@ class WeatherForcastViewModel {
     
     func currentWeatherData () -> CurrentWeatherModel? {
         return self.currentWeather
+    }
+    
+    func weatherForcastData (index:Int) -> FocastModel {
+        
+        let day = Date().dayOfWeek()
+        
+        var currentDayIndex = daysOfTheWeek.firstIndex(where: {$0 == day})
+        
+        guard let startDayIndex = currentDayIndex,
+              let temperature = weatherForcast?.list?[index].main?.temp else {
+            return FocastModel(temp: "", icon: UIImage() , dayOfWeek: "")
+        }
+        
+        let dayOfWeekIndex = startDayIndex+index+1
+        
+        let wrapingDayOfWeekIndex  = (dayOfWeekIndex % 7 + 7 ) % 7
+        return FocastModel(temp: String(temperature),
+                           icon: UIImage(),
+                           dayOfWeek: daysOfTheWeek[wrapingDayOfWeekIndex])
+      
     }
     
     func convertKalvinToCelcics(temperature:Double) -> String {

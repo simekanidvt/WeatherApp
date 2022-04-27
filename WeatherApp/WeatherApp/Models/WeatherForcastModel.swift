@@ -28,7 +28,7 @@ struct List : Codable {
 
 // MARK: - Main
 struct ForcastMain: Codable {
-    var temp_max : Double?
+    var temp : Double?
 }
 
 // MARK: - Weather
