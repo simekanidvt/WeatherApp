@@ -29,6 +29,7 @@ class WeatherForcastViewController: UIViewController {
         locationManagerSetUp()
         viewModel.retrieveCurrentWeatherFromAPI()
         viewModel.retrieveWeatherForcastFromAPI()
+        viewModel.applyTheme(weatherDescription: description)
     }
     
     private func tableViewSetUp() {
@@ -43,8 +44,6 @@ class WeatherForcastViewController: UIViewController {
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
     }
-    
-
     
     @IBAction private func tapped(_ sender: UISwitch) {
         viewModel.toggleTheme(isForest: sender.isOn)
@@ -72,38 +71,27 @@ extension WeatherForcastViewController: CLLocationManagerDelegate {
             viewModel.setLocation(location: location)
             viewModel.retrieveCurrentWeatherFromAPI()
             viewModel.retrieveWeatherForcastFromAPI()
-            reloadTheme()
-            
+            viewModel.applyTheme(weatherDescription: weatherDescriptionLabel.text ?? "Clear" )
         }
     }
 }
 
 extension WeatherForcastViewController: WeatherForcastDelegate {
-    
-     func reloadTheme() {
-        
-        let weather = weatherDescriptionLabel.text
-        
-        switch(weather) {
-        case "Clouds":
-            self.view.backgroundColor = Theme.currentTheme.cloudyColour
-            self.image.image = Theme.currentTheme.cloudyImage
-            
-        case "Clear":
-            self.view.backgroundColor = Theme.currentTheme.sunnyColour
-            self.image.image = Theme.currentTheme.sunnyImage
-            
-        case "Rain":
-            self.view.backgroundColor = Theme.currentTheme.rainyColour
-            self.image.image = Theme.currentTheme.rainyImage
-        case .none:
-            self.view.backgroundColor = Theme.currentTheme.cloudyColour
-            self.image.image = Theme.currentTheme.cloudyImage
-        case .some(_):
-            self.view.backgroundColor = Theme.currentTheme.cloudyColour
-            self.image.image = Theme.currentTheme.cloudyImage
-        }
+    func cloudyTheme() {
+        self.view.backgroundColor = Theme.currentTheme.cloudyColour
+        self.image.image = Theme.currentTheme.cloudyImage
     }
+    
+    func sunnyTheme() {
+        self.view.backgroundColor = Theme.currentTheme.sunnyColour
+        self.image.image = Theme.currentTheme.sunnyImage
+    }
+    
+    func rainyTheme() {
+        self.view.backgroundColor = Theme.currentTheme.rainyColour
+        self.image.image = Theme.currentTheme.rainyImage
+    }
+    
     func populateWeatherForcast() {
         //
     }
@@ -131,7 +119,6 @@ extension WeatherForcastViewController: WeatherForcastDelegate {
         self.minTempLabel.text = self.viewModel.convertKalvinToCelcics(temperature: minTemp)
         self.maxTempLabel.text = self.viewModel.convertKalvinToCelcics(temperature: maxTemp)
         self.weatherDescriptionLabel.text = description
-        self.reloadTheme()
-        
+        viewModel.applyTheme(weatherDescription: description)
     }
 }

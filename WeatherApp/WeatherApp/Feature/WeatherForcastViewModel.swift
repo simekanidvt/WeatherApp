@@ -13,10 +13,9 @@ protocol WeatherForcastDelegate {
     func showError()
     func populateCurrentWeather()
     func populateWeatherForcast()
-    func reloadTheme()
-    func applyForestTheme()
-    func applySeaTheme()
-    
+    func sunnyTheme()
+    func rainyTheme()
+    func cloudyTheme()
 }
 
 class WeatherForcastViewModel {
@@ -42,7 +41,23 @@ class WeatherForcastViewModel {
         } else {
             Theme.currentTheme = SeaTheme()
         }
-        delegate.reloadTheme()
+        applyTheme(weatherDescription: currentWeather?.weather?[0].main ?? "Clear")
+    }
+    
+    func applyTheme(weatherDescription:String) {
+        switch(weatherDescription) {
+        case "Clouds":
+            delegate.cloudyTheme()
+
+        case "Clear":
+            delegate.sunnyTheme()
+            
+        case "Rain":
+            delegate.rainyTheme()
+            
+        default:
+            delegate.sunnyTheme()
+        }
     }
     
     func retrieveCurrentWeatherFromAPI() {
@@ -59,7 +74,6 @@ class WeatherForcastViewModel {
             case .success(let currentWeather) :
                 self?.currentWeather = currentWeather
                 self?.delegate.populateCurrentWeather()
-                self?.delegate.reloadTheme()
             case .failure(let error):
                 self?.delegate.showError()
             }
@@ -80,7 +94,6 @@ class WeatherForcastViewModel {
             case .success(let weatherForcastData) :
                 self?.weatherForcast = weatherForcastData
                 self?.delegate.populateWeatherForcast()
-                self?.delegate.reloadTheme()
             case .failure(let error):
                 self?.delegate.showError()
             }
