@@ -60,8 +60,8 @@ extension WeatherForcastViewController : UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let forcastData = viewModel.weatherForcastData(index: indexPath.item)
-        cell.setCellProperties(dayOfWeekLabel: forcastData.dayOfWeek, weatherImage: UIImage(), temprature: forcastData.temperature)
+        let forcastData = viewModel.weatherForcastData(tableviewCellIndex: indexPath.item)
+        cell.setCellProperties(dayOfWeekLabel: forcastData.dayOfWeek, weatherImage: forcastData.icon, temprature: forcastData.temperature)
         return cell
     }
 }
@@ -117,9 +117,9 @@ extension WeatherForcastViewController: WeatherForcastDelegate {
             return
         }
         
-        self.largeCurrentTempLabel.text = self.viewModel.convertKalvinToCelcics(temperature: temp)
-        self.minTempLabel.text = self.viewModel.convertKalvinToCelcics(temperature: minTemp)
-        self.maxTempLabel.text = self.viewModel.convertKalvinToCelcics(temperature: maxTemp)
+        self.largeCurrentTempLabel.text = self.viewModel.convertKalvinToCelsius(temperature: temp)
+        self.minTempLabel.text = self.viewModel.convertKalvinToCelsius(temperature: minTemp)
+        self.maxTempLabel.text = self.viewModel.convertKalvinToCelsius(temperature: maxTemp)
         self.weatherDescriptionLabel.text = description
         viewModel.applyTheme(weatherDescription: description)
     }

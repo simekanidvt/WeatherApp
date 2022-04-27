@@ -53,7 +53,7 @@ class WeatherForcastViewModel {
         switch(weatherDescription) {
         case "Clouds":
             delegate.cloudyTheme()
-
+            
         case "Clear":
             delegate.sunnyTheme()
             
@@ -110,28 +110,52 @@ class WeatherForcastViewModel {
         return self.currentWeather
     }
     
-    func weatherForcastData (index:Int) -> FocastModel {
+    func weatherForcastData (tableviewCellIndex:Int) -> FocastModel {
         
-        let day = Date().dayOfWeek()
+        guard let temperature = weatherForcast?.list?[tableviewCellIndex].main?.temp,
+              let index = dayOfTheWeekIndex(tableviewCellIndex: tableviewCellIndex) else {
+                  return FocastModel(temp: "", icon: UIImage() , dayOfWeek: "")
+              }
         
-        var currentDayIndex = daysOfTheWeek.firstIndex(where: {$0 == day})
         
-        guard let startDayIndex = currentDayIndex,
-              let temperature = weatherForcast?.list?[index].main?.temp else {
-            return FocastModel(temp: "", icon: UIImage() , dayOfWeek: "")
-        }
+        let image = weatherIcon(weather: weatherForcast?.list?[tableviewCellIndex].weather?[0].main ?? "clear")
         
-        let dayOfWeekIndex = startDayIndex+index+1
+        return FocastModel(temp: convertKalvinToCelsius(temperature: temperature),
+                           icon: image,
+                           dayOfWeek: daysOfTheWeek[index])
         
-        let wrapingDayOfWeekIndex  = (dayOfWeekIndex % 7 + 7 ) % 7
-        return FocastModel(temp: String(temperature),
-                           icon: UIImage(),
-                           dayOfWeek: daysOfTheWeek[wrapingDayOfWeekIndex])
-      
     }
     
-    func convertKalvinToCelcics(temperature:Double) -> String {
+    func convertKalvinToCelsius(temperature:Double) -> String {
         String(format: "%.0f", temperature - 273.15)+"°"
+    }
+    func weatherIcon(weather: String)->UIImage{
+        switch(weather) {
+        case "Clouds":
+            return UIImage(named: "partlysunny") ?? UIImage()
+            
+        case "Clear":
+            return UIImage(named: "clear") ?? UIImage()
+            
+        case "Rain":
+            return UIImage(named: "rain") ?? UIImage()
+            
+        default:
+            return UIImage(named: "clear") ?? UIImage()
+        }
+    }
+    
+    private func dayOfTheWeekIndex(tableviewCellIndex: Int) -> Int? {
+        let day = Date().dayOfWeek()
+        var currentDayIndex = daysOfTheWeek.firstIndex(where: {$0 == day})
+        guard let startDayIndex = currentDayIndex else {
+            return nil
+        }
+        let dayOfWeekIndex = startDayIndex+tableviewCellIndex+1
+        
+        let wrappedDayOfWeekIndex  = (dayOfWeekIndex % 7 + 7 ) % 7
+        
+        return wrappedDayOfWeekIndex
     }
 }
 
