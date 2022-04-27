@@ -35,7 +35,7 @@ class WeatherForcastViewModel {
         self.location = location
     }
     
-    func toggleTheme(isForest:Bool){
+    func toggleTheme(isForest:Bool) {
         if (isForest) {
             Theme.currentTheme = ForestTheme()
         } else {
@@ -44,7 +44,7 @@ class WeatherForcastViewModel {
         applyTheme(weatherDescription: currentWeather?.weather?[0].main ?? "Clear")
     }
     
-    func applyTheme(weatherDescription:String) {
+    func applyTheme(weatherDescription:String){
         switch(weatherDescription) {
         case "Clouds":
             delegate.cloudyTheme()

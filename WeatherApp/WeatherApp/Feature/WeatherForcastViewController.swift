@@ -59,7 +59,6 @@ extension WeatherForcastViewController : UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: WeatherInfoTableViewCell.identifier)  as? WeatherInfoTableViewCell else {
             return UITableViewCell()
         }
-        
         return cell
     }
 }

@@ -11,19 +11,23 @@ class WeatherInfoTableViewCell: UITableViewCell {
     
     static let identifier = "WeatherInfoTableViewCell"
     
+    @IBOutlet private weak var dayOfWeekLabel: UILabel!
+    @IBOutlet private weak var weatherImage: UIImageView!
+    @IBOutlet private weak var temperatureLabel: UILabel!
+    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
    static func nib() -> UINib {
         return UINib( nibName:"WeatherInfoTableViewCell", bundle: nil)
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func setCellProperties(dayOfWeekLabel: String, weatherImage:UIImage, temprature: String) {
+        self.dayOfWeekLabel.text = dayOfWeekLabel
+        self.temperatureLabel.text = temprature
+        self.weatherImage.image = weatherImage
     }
     
 }

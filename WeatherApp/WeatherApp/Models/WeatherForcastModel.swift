@@ -22,13 +22,13 @@ struct ForcastCoord: Codable {
 struct List : Codable {
     var dt: Int?
     var main: ForcastMain?
-    var weather: [WeatherForcastModel]?
+    var weather: [ForcastWeather]?
 }
 
-// MARK: - Cloud
+
 // MARK: - Main
 struct ForcastMain: Codable {
-    var temp: Double?
+    var temp_max : Double?
 }
 
 // MARK: - Weather

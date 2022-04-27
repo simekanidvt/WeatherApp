@@ -51,6 +51,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="dayOfWeekLabel" destination="Kgy-Qu-9Rf" id="g6I-hm-RwL"/>
+                <outlet property="temperatureLabel" destination="CBi-Bg-Nk8" id="SWX-Cx-oFC"/>
+                <outlet property="weatherImage" destination="BFl-U8-mVX" id="iyE-wp-53Y"/>
+            </connections>
             <point key="canvasLocation" x="357.97101449275362" y="153.01339285714286"/>
         </tableViewCell>
     </objects>
