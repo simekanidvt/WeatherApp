@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="forest_sunny" translatesAutoresizingMaskIntoConstraints="NO" id="Ov3-rv-boB">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ov3-rv-boB">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="358.5"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="J1o-rS-O1J">
@@ -43,9 +43,10 @@
                                     <constraint firstAttribute="height" constant="2" id="jfs-OW-BtB"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="54" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Z5z-r0-MZy">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="54" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Z5z-r0-MZy">
                                 <rect key="frame" x="20" y="451" width="374" height="411"/>
-                                <color key="backgroundColor" name="Sunny"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="9wR-rP-b2o">
                                 <rect key="frame" x="20" y="363.5" width="374" height="50.5"/>
@@ -66,7 +67,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" name="Sunny"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VqT-do-GI5">
                                         <rect key="frame" x="152.5" y="0.0" width="66.5" height="50.5"/>
@@ -84,7 +85,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" name="Sunny"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3ES-fZ-UXi">
                                         <rect key="frame" x="337" y="0.0" width="37" height="50.5"/>
@@ -102,10 +103,16 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" name="Sunny"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7yt-Ni-uCZ">
+                                <rect key="frame" x="319" y="69" width="51" height="31"/>
+                                <connections>
+                                    <action selector="tapped:" destination="BYZ-38-t0r" eventType="valueChanged" id="Kzr-WS-KYb"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="Sunny"/>
@@ -118,10 +125,12 @@
                             <constraint firstItem="Ov3-rv-boB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="a0y-GY-jZJ"/>
                             <constraint firstItem="9wR-rP-b2o" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="a75-hu-llm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Z5z-r0-MZy" secondAttribute="trailing" constant="20" id="b3V-2O-3w3"/>
+                            <constraint firstItem="7yt-Ni-uCZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="25" id="e7O-zR-nj2"/>
                             <constraint firstItem="i7e-Ol-elp" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="i9D-u7-ael"/>
                             <constraint firstItem="9wR-rP-b2o" firstAttribute="top" secondItem="Ov3-rv-boB" secondAttribute="bottom" constant="5" id="k9n-nb-Tnh"/>
                             <constraint firstItem="i7e-Ol-elp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ley-TA-qFI"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Z5z-r0-MZy" secondAttribute="bottom" id="mQu-N9-oa5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7yt-Ni-uCZ" secondAttribute="trailing" constant="46" id="moi-pg-pmy"/>
                             <constraint firstItem="Z5z-r0-MZy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="omk-vc-t1k"/>
                             <constraint firstItem="Ov3-rv-boB" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="pAm-dd-Rmk"/>
                             <constraint firstItem="J1o-rS-O1J" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="47" id="rZF-uZ-EwJ"/>
@@ -130,15 +139,20 @@
                     </view>
                     <connections>
                         <outlet property="futureForcastTableView" destination="Z5z-r0-MZy" id="IDl-yu-Oma"/>
+                        <outlet property="image" destination="Ov3-rv-boB" id="6jb-3i-KI1"/>
+                        <outlet property="largeCurrentTempLabel" destination="Q6T-9a-BR0" id="DqF-Yq-uxC"/>
+                        <outlet property="maxTempLabel" destination="UGq-ip-sS3" id="AtE-0y-UWg"/>
+                        <outlet property="minTempLabel" destination="HhL-oK-yOs" id="OV0-do-7MK"/>
+                        <outlet property="smallCurrentTempLabel" destination="SWk-VJ-sX6" id="9A1-hf-xrX"/>
+                        <outlet property="weatherDescriptionLabel" destination="HV9-1A-kmC" id="3W6-3R-5cn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-548" y="-321"/>
+            <point key="canvasLocation" x="-549.27536231884062" y="-321.42857142857139"/>
         </scene>
     </scenes>
     <resources>
-        <image name="forest_sunny" width="360" height="321"/>
         <namedColor name="Sunny">
             <color red="0.27843137254901962" green="0.6705882352941176" blue="0.18431372549019609" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
