@@ -9,7 +9,6 @@ import Foundation
 
 protocol SavedWeatherDeleage :AnyObject {
     func reloadTableView()
-    func showError()
 }
 
 class SavedWeatherViewModel {
@@ -28,7 +27,7 @@ class SavedWeatherViewModel {
                 self?.savedLocations = savedWeather
                 self?.delegate?.reloadTableView()
             case .failure(let error):
-                self?.delegate?.showError()
+              return
             }
         })
     }

@@ -10,7 +10,7 @@ import UIKit
 
 class SavedWeatherViewController: UIViewController {
     
-    @IBOutlet weak var savedWeatherTableview: UITableView!
+    @IBOutlet private weak var savedWeatherTableview: UITableView!
     
     private lazy var viewModel = SavedWeatherViewModel(repository: SavedWeatherRepository(), delegate: self )
     
@@ -32,9 +32,8 @@ extension SavedWeatherViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         guard let cell = tableView.dequeueReusableCell(withIdentifier: SavedWeatherTableViewCell.identifier, for: indexPath)  as? SavedWeatherTableViewCell else {
-            return UITableViewCell()
-        }
+         guard let cell = tableView.dequeueReusableCell(withIdentifier: SavedWeatherTableViewCell.identifier,
+                                                        for: indexPath)  as? SavedWeatherTableViewCell else { return UITableViewCell() }
         guard let location = viewModel.savedLocation(atIndex: indexPath.item),
               let locationName = location.locationName ,
               let locationTemperature = location.temprature else {
@@ -46,12 +45,8 @@ extension SavedWeatherViewController: UITableViewDataSource {
     }
 }
 
-extension SavedWeatherViewController: SavedWeatherDeleage{
+extension SavedWeatherViewController: SavedWeatherDeleage {
     func reloadTableView() {
         savedWeatherTableview.reloadData()
-    }
-    
-    func showError() {
-        // Show an error
     }
 }
