@@ -13,7 +13,6 @@ protocol WeatherForcastDelegate : AnyObject {
     func reloadTableview()
     func showError()
     func populateCurrentWeather()
-    func populateWeatherForcast()
     func sunnyTheme()
     func rainyTheme()
     func cloudyTheme()
@@ -100,7 +99,7 @@ class WeatherForcastViewModel {
             switch result {
             case .success(let weatherForcastData) :
                 self?.weatherForcast = weatherForcastData
-                self?.delegate?.populateWeatherForcast()
+
                 self?.delegate?.reloadTableview()
             case .failure(let error):
                 self?.delegate?.showError()
@@ -126,19 +125,6 @@ class WeatherForcastViewModel {
             switch(result) {
             case .success(let savedWeather):
                 self?.delegate?.showError()
-            case .failure(let error):
-                self?.delegate?.showError()
-            }
-        })
-    }
-    
-    func fetchCurrentWeatherToFavorites() {
-        
-        savedWeatherRepository?.fetchSavedWeather(completion: {[weak self] result in
-            switch(result) {
-            case .success(let savedWeather):
-                print(savedWeather)
-                
             case .failure(let error):
                 self?.delegate?.showError()
             }
