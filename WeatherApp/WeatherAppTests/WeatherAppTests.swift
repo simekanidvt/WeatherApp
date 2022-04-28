@@ -29,7 +29,7 @@ class WeatherAppTests: XCTestCase {
                 completion(.success(CurrentWeatherModel(coord: Coord(lon: 145, lat: 345),
                                                         weather: [Weather( main: "Cloudy")],
                                                         main: Main(temp: 234.0, tempMin: 459.0, tempMax: 234.0),
-                                                        visibility: <#T##Int?#>,name: "JHB")))
+                                                        visibility: 1,name: "JHB")))
             } else {
                 completion(.failure(.invalidData))
             }
