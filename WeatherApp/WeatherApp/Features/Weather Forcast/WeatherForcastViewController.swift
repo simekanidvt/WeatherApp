@@ -45,6 +45,9 @@ class WeatherForcastViewController: UIViewController {
         manager.startUpdatingLocation()
     }
     
+    @IBAction func saveLocationWeather(_ sender: Any) {
+        viewModel.saveCurrentWeatherToFavorites()
+    }
     @IBAction private func tapped(_ sender: UISwitch) {
         viewModel.toggleTheme(isForest: sender.isOn)
     }

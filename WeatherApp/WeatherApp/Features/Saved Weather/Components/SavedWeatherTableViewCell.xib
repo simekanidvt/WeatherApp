@@ -17,14 +17,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Roodepoort" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMe-sj-Cpf">
-                        <rect key="frame" x="0.0" y="0.0" width="91" height="112"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="0.0" y="0.0" width="203" height="112"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8J5-s8-DPa">
-                        <rect key="frame" x="413" y="0.0" width="18" height="112"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="389.5" y="0.0" width="41.5" height="112"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -39,6 +39,10 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="LocationName" destination="wMe-sj-Cpf" id="4hD-Ay-FPB"/>
+                <outlet property="temperature" destination="8J5-s8-DPa" id="WIu-8X-653"/>
+            </connections>
             <point key="canvasLocation" x="212.31884057971016" y="106.47321428571428"/>
         </tableViewCell>
     </objects>

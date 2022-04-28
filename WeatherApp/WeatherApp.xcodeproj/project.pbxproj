@@ -33,6 +33,8 @@
 		0BFC74BA281A82160049ECB2 /* SavedWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFC74B9281A82160049ECB2 /* SavedWeatherViewController.swift */; };
 		0BFC74BC281A822D0049ECB2 /* SavedWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFC74BB281A822D0049ECB2 /* SavedWeatherViewModel.swift */; };
 		0BFC74BE281A82430049ECB2 /* SavedWeatherRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFC74BD281A82430049ECB2 /* SavedWeatherRepository.swift */; };
+		0BFC74C4281AADE60049ECB2 /* LocationItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFC74C3281AADE60049ECB2 /* LocationItem+CoreDataClass.swift */; };
+		0BFC74C6281AADEA0049ECB2 /* LocationItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFC74C5281AADEA0049ECB2 /* LocationItem+CoreDataProperties.swift */; };
 		64BE863613736D91D1CF7C68 /* libPods-WeatherApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2386A1323D959EF13A7F86B1 /* libPods-WeatherApp.a */; };
 		7FAE1B71B2A6B5E93691B003 /* libPods-WeatherApp-WeatherAppUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2E679EC6D05E084E87AEF0 /* libPods-WeatherApp-WeatherAppUITests.a */; };
 		DE708B9B3838779D8A891959 /* libPods-WeatherAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5918147FFC4AB946C4D850E /* libPods-WeatherAppTests.a */; };
@@ -87,6 +89,8 @@
 		0BFC74B9281A82160049ECB2 /* SavedWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedWeatherViewController.swift; sourceTree = "<group>"; };
 		0BFC74BB281A822D0049ECB2 /* SavedWeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedWeatherViewModel.swift; sourceTree = "<group>"; };
 		0BFC74BD281A82430049ECB2 /* SavedWeatherRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedWeatherRepository.swift; sourceTree = "<group>"; };
+		0BFC74C3281AADE60049ECB2 /* LocationItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "LocationItem+CoreDataClass.swift"; path = "/Users/smabambi/Code/WeatherApp/WeatherApp/WeatherApp/Service Layer/LocationItem+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		0BFC74C5281AADEA0049ECB2 /* LocationItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "LocationItem+CoreDataProperties.swift"; path = "/Users/smabambi/Code/WeatherApp/WeatherApp/WeatherApp/Service Layer/LocationItem+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		2386A1323D959EF13A7F86B1 /* libPods-WeatherApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WeatherApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E0C69D784B4705AB8349BE6 /* Pods-WeatherAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherAppTests.release.xcconfig"; path = "Target Support Files/Pods-WeatherAppTests/Pods-WeatherAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		5C2E679EC6D05E084E87AEF0 /* libPods-WeatherApp-WeatherAppUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WeatherApp-WeatherAppUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,6 +222,8 @@
 		0BE64B3428114BF1002EFC32 /* Service Layer */ = {
 			isa = PBXGroup;
 			children = (
+				0BFC74C3281AADE60049ECB2 /* LocationItem+CoreDataClass.swift */,
+				0BFC74C5281AADEA0049ECB2 /* LocationItem+CoreDataProperties.swift */,
 				0B52101428146F9A00895EB2 /* Constants.swift */,
 				0B52101228146F3A00895EB2 /* URLSession+Extension.swift */,
 				0B712B4728169DB000BE3AAF /* DateExtension.swift */,
@@ -524,6 +530,7 @@
 				0BFC74BE281A82430049ECB2 /* SavedWeatherRepository.swift in Sources */,
 				0B52100828142B6500895EB2 /* WeatherForcastViewModel.swift in Sources */,
 				0BE64B0A28114AE8002EFC32 /* WeatherApp.xcdatamodeld in Sources */,
+				0BFC74C6281AADEA0049ECB2 /* LocationItem+CoreDataProperties.swift in Sources */,
 				0B5210182814724B00895EB2 /* CurrentWeatherModel.swift in Sources */,
 				0BFC74BC281A822D0049ECB2 /* SavedWeatherViewModel.swift in Sources */,
 				0BFC74B7281A80870049ECB2 /* SavedWeatherTableViewCell.swift in Sources */,
@@ -533,6 +540,7 @@
 				0B52101328146F3A00895EB2 /* URLSession+Extension.swift in Sources */,
 				0BE64B0228114AE8002EFC32 /* SceneDelegate.swift in Sources */,
 				0B52101A281472F500895EB2 /* WeatherForcastModel.swift in Sources */,
+				0BFC74C4281AADE60049ECB2 /* LocationItem+CoreDataClass.swift in Sources */,
 				0BFC74BA281A82160049ECB2 /* SavedWeatherViewController.swift in Sources */,
 				0B52100E28142BEA00895EB2 /* WeatherInfoTableViewCell.swift in Sources */,
 				0B712B462815B85400BE3AAF /* ThemeProtocol.swift in Sources */,

@@ -9,6 +9,8 @@ import UIKit
 
 class SavedWeatherTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var locationName: UILabel!
+    @IBOutlet weak var temperature: UILabel!
     static let identifier = "SavedWeatherTableViewCell"
     
 
@@ -16,4 +18,8 @@ class SavedWeatherTableViewCell: UITableViewCell {
          return UINib( nibName:"SavedWeatherTableViewCell", bundle: nil)
      }
     
+    func setProperties(locationName: String, temperature: String){
+        self.locationName.text = locationName
+        self.temperature.text = temperature
+    }
 }

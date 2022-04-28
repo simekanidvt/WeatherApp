@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 import UIKit
 
-protocol WeatherForcastDelegate {
+protocol WeatherForcastDelegate : AnyObject{
     func reloadTableview()
     func showError()
     func populateCurrentWeather()
@@ -30,10 +30,12 @@ class WeatherForcastViewModel {
     private let repository: WeatherForcastRepository
     private let delegate:WeatherForcastDelegate
     private var weatherForcast: WeatherForcastModel?
+    private var savedWeatherRepository: SavedWeatherRepository?
     
     init(repository: WeatherForcastRepository, delegate: WeatherForcastDelegate) {
         self.repository = repository
         self.delegate = delegate
+        self.savedWeatherRepository = SavedWeatherRepository()
     }
     
     func setLocation(location: CLLocation) {
@@ -49,7 +51,7 @@ class WeatherForcastViewModel {
         applyTheme(weatherDescription: currentWeather?.weather?[0].main ?? "Clear")
     }
     
-    func applyTheme(weatherDescription:String){
+    func applyTheme(weatherDescription:String) {
         switch(weatherDescription) {
         case "Clouds":
             delegate.cloudyTheme()
@@ -106,6 +108,43 @@ class WeatherForcastViewModel {
         })
     }
     
+    func saveCurrentWeatherToFavorites() {
+        guard let currentWeather = currentWeather,
+              let temprature = currentWeather.main?.temp,
+              let longitude = currentWeather.coord?.lon,
+              let latitude = currentWeather.coord?.lat,
+              let name = currentWeather.name
+        else { return }
+        
+        
+        savedWeatherRepository?.saveLocationWeather(temperature: convertKalvinToCelsius(temperature: temprature) ,
+                                                    name: name,
+                                                    longitude: String(longitude),
+                                                    latitude: String(latitude),
+                                                    completion: {[weak self] result in
+            
+            switch(result) {
+            case .success(let savedWeather):
+                self?.delegate.showError()
+            case .failure(let error):
+                self?.delegate.showError()
+            }
+        })
+    }
+    
+    func fetchCurrentWeatherToFavorites() {
+        
+        savedWeatherRepository?.fetchSavedWeather(completion: {[weak self] result in
+            switch(result) {
+            case .success(let savedWeather):
+                print(savedWeather)
+                
+            case .failure(let error):
+                self?.delegate.showError()
+            }
+        })
+    }
+    
     func currentWeatherData () -> CurrentWeatherModel? {
         return self.currentWeather
     }
@@ -117,18 +156,17 @@ class WeatherForcastViewModel {
                   return FocastModel(temp: "", icon: UIImage() , dayOfWeek: "")
               }
         
-        
         let image = weatherIcon(weather: weatherForcast?.list?[tableviewCellIndex].weather?[0].main ?? "clear")
         
         return FocastModel(temp: convertKalvinToCelsius(temperature: temperature),
                            icon: image,
                            dayOfWeek: daysOfTheWeek[index])
-        
     }
     
     func convertKalvinToCelsius(temperature:Double) -> String {
         String(format: "%.0f", temperature - 273.15)+"°"
     }
+    
     func weatherIcon(weather: String) -> UIImage {
         switch(weather) {
         case "Clouds":
@@ -158,5 +196,3 @@ class WeatherForcastViewModel {
         return wrappedDayOfWeekIndex
     }
 }
-
-
