@@ -179,7 +179,7 @@
         <!--Saved-->
         <scene sceneID="OPw-fp-mMt">
             <objects>
-                <viewController id="uMH-z3-fky" sceneMemberID="viewController">
+                <viewController id="uMH-z3-fky" customClass="SavedWeatherViewController" customModule="WeatherApp" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Km5-r4-YM0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -199,6 +199,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Saved" image="bookmark.fill" catalog="system" selectedImage="bookmark.fill" id="MhS-Ia-7ct"/>
+                    <connections>
+                        <outlet property="savedWeatherTableview" destination="UpJ-7P-HUv" id="74F-F5-bzd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hdv-Dx-edG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
