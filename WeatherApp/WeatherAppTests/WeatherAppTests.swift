@@ -9,28 +9,79 @@ import XCTest
 @testable import WeatherApp
 
 class WeatherAppTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    private var viewModel: WeatherForcastViewModel!
+    private var mockForcastRepository: WeatherForcastReposirotyType!
+    private var mockSavedWeatherRepository: SavedWeatherRepository!
+    private var mockdelegate:MockWetherForcastDelegate!
+    
+    override func setUp() {
+        mockForcastRepository = MockForcastRepository()
+        mockSavedWeatherRepository = SavedWeatherRepository()
+        mockdelegate = MockWetherForcastDelegate()
+        viewModel = WeatherForcastViewModel(repository: self.mockForcastRepository, delegate: mockdelegate)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    class MockForcastRepository: WeatherForcastReposirotyType {
+        var success = false
+        func fetchCurrentWeather(longitude: String, latitude: String, completion: @escaping CurrentWeatherResult) {
+            if(success) {
+                completion(.success(CurrentWeatherModel(coord: Coord(lon: 145, lat: 345),
+                                                        weather: [Weather( main: "Cloudy")],
+                                                        main: Main(temp: 234.0, tempMin: 459.0, tempMax: 234.0),
+                                                        visibility: 1,name: "JHB")))
+            } else {
+                completion(.failure(.invalidData))
+            }
+        }
+        
+        func fetchWeatherForcast(longitude: String, latitude: String, completion: @escaping WeatherForcastResult) {
+            if(success) {
+                completion(.success(WeatherForcastModel( cnt: 5, list: [List( main: ForcastMain(temp: 124))])))
+            } else {
+                completion(.failure(.invalidData))
+            }
+        }
+        
+        func successfulCall() {
+            success = true
         }
     }
-
+    
+    class MockWetherForcastDelegate : WeatherForcastDelegate {
+        var rainyThemeIsCalled = false
+        var cloudyThemeIsCalled = false
+        var sunnyThemeIsCalled = false
+        var populateCurrentWeatherIsCalled = false
+        var reloadTableViewIsCalled = false
+        var showErrorIsCalled = false
+        
+        func reloadTableview() {
+            reloadTableViewIsCalled = true
+        }
+        
+        func showError() {
+            showErrorIsCalled = true
+        }
+        
+        func populateCurrentWeather() {
+            populateCurrentWeatherIsCalled = true
+        }
+        
+        func populateWeatherForcast() {
+            //
+        }
+        
+        func sunnyTheme() {
+            sunnyThemeIsCalled = true
+        }
+        
+        func rainyTheme() {
+            rainyThemeIsCalled = true
+        }
+        
+        func cloudyTheme() {
+            cloudyThemeIsCalled = true
+        }
+    }
 }

@@ -45,6 +45,9 @@ class WeatherForcastViewController: UIViewController {
         manager.startUpdatingLocation()
     }
     
+    @IBAction private func saveLocationWeather(_ sender: Any) {
+        viewModel.saveCurrentWeatherToFavorites()
+    }
     @IBAction private func tapped(_ sender: UISwitch) {
         viewModel.toggleTheme(isForest: sender.isOn)
     }
@@ -92,10 +95,6 @@ extension WeatherForcastViewController: WeatherForcastDelegate {
     func rainyTheme() {
         self.view.backgroundColor = Theme.currentTheme.rainyColour
         self.image.image = Theme.currentTheme.rainyImage
-    }
-    
-    func populateWeatherForcast() {
-     
     }
     
     func reloadTableview() {
