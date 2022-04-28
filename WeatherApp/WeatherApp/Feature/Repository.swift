@@ -19,6 +19,7 @@ class WeatherForcastRepository: WeatherForcastReposirotyType {
     func fetchCurrentWeather(longitude: String, latitude: String, completion: @escaping CurrentWeatherResult){
         
         let url = Constants.baseURL+"data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid="+Constants.apiKey
+        
         URLSession.shared.makeRequest(url: URL(string: url),
                                       method: .get,
                                       returnModel: CurrentWeatherModel.self,
