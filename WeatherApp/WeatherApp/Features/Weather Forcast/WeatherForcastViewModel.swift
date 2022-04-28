@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 import UIKit
 
-protocol WeatherForcastDelegate : AnyObject{
+protocol WeatherForcastDelegate : AnyObject {
     func reloadTableview()
     func showError()
     func populateCurrentWeather()
@@ -27,12 +27,12 @@ class WeatherForcastViewModel {
     
     private var  location: CLLocation?
     private var currentWeather: CurrentWeatherModel?
-    private let repository: WeatherForcastRepository
-    private let delegate:WeatherForcastDelegate
+    private var repository: WeatherForcastReposirotyType
+    private weak var delegate:WeatherForcastDelegate?
     private var weatherForcast: WeatherForcastModel?
     private var savedWeatherRepository: SavedWeatherRepository?
     
-    init(repository: WeatherForcastRepository, delegate: WeatherForcastDelegate) {
+    init(repository: WeatherForcastReposirotyType, delegate: WeatherForcastDelegate) {
         self.repository = repository
         self.delegate = delegate
         self.savedWeatherRepository = SavedWeatherRepository()
@@ -54,22 +54,22 @@ class WeatherForcastViewModel {
     func applyTheme(weatherDescription:String) {
         switch(weatherDescription) {
         case "Clouds":
-            delegate.cloudyTheme()
+            delegate?.cloudyTheme()
             
         case "Clear":
-            delegate.sunnyTheme()
+            delegate?.sunnyTheme()
             
         case "Rain":
-            delegate.rainyTheme()
+            delegate?.rainyTheme()
             
         default:
-            delegate.sunnyTheme()
+            delegate?.sunnyTheme()
         }
     }
     
     func retrieveCurrentWeatherFromAPI() {
         guard let location =  self.location else {
-            delegate.showError()
+            delegate?.showError()
             return
         }
         
@@ -80,16 +80,16 @@ class WeatherForcastViewModel {
             switch result {
             case .success(let currentWeather) :
                 self?.currentWeather = currentWeather
-                self?.delegate.populateCurrentWeather()
+                self?.delegate?.populateCurrentWeather()
             case .failure(let error):
-                self?.delegate.showError()
+                self?.delegate?.showError()
             }
         })
     }
     
     func retrieveWeatherForcastFromAPI() {
         guard let location =  self.location else {
-            delegate.showError()
+            delegate?.showError()
             return
         }
         
@@ -100,10 +100,10 @@ class WeatherForcastViewModel {
             switch result {
             case .success(let weatherForcastData) :
                 self?.weatherForcast = weatherForcastData
-                self?.delegate.populateWeatherForcast()
-                self?.delegate.reloadTableview()
+                self?.delegate?.populateWeatherForcast()
+                self?.delegate?.reloadTableview()
             case .failure(let error):
-                self?.delegate.showError()
+                self?.delegate?.showError()
             }
         })
     }
@@ -125,9 +125,9 @@ class WeatherForcastViewModel {
             
             switch(result) {
             case .success(let savedWeather):
-                self?.delegate.showError()
+                self?.delegate?.showError()
             case .failure(let error):
-                self?.delegate.showError()
+                self?.delegate?.showError()
             }
         })
     }
@@ -140,7 +140,7 @@ class WeatherForcastViewModel {
                 print(savedWeather)
                 
             case .failure(let error):
-                self?.delegate.showError()
+                self?.delegate?.showError()
             }
         })
     }
