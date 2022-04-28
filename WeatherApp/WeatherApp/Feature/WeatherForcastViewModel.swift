@@ -129,7 +129,7 @@ class WeatherForcastViewModel {
     func convertKalvinToCelsius(temperature:Double) -> String {
         String(format: "%.0f", temperature - 273.15)+"°"
     }
-    func weatherIcon(weather: String)->UIImage{
+    func weatherIcon(weather: String) -> UIImage {
         switch(weather) {
         case "Clouds":
             return UIImage(named: "partlysunny") ?? UIImage()

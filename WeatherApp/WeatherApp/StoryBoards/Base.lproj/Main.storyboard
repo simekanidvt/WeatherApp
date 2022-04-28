@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DKG-hX-J1p">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Weather Forcast View Controller-->
+        <!--Weather-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="WeatherForcastViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -44,7 +45,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="54" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Z5z-r0-MZy">
-                                <rect key="frame" x="20" y="451" width="374" height="411"/>
+                                <rect key="frame" x="20" y="451" width="374" height="362"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
@@ -137,6 +138,11 @@
                             <constraint firstItem="i7e-Ol-elp" firstAttribute="top" secondItem="9wR-rP-b2o" secondAttribute="bottom" constant="10" id="zSx-u9-EHG"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Weather" id="Mxq-BA-0Lq">
+                        <imageReference key="image" image="cloud" catalog="system" symbolScale="large"/>
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <imageReference key="selectedImage" image="cloud.fill" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="futureForcastTableView" destination="Z5z-r0-MZy" id="IDl-yu-Oma"/>
                         <outlet property="image" destination="Ov3-rv-boB" id="6jb-3i-KI1"/>
@@ -151,10 +157,63 @@
             </objects>
             <point key="canvasLocation" x="-549.27536231884062" y="-321.42857142857139"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="spz-bh-7Je">
+            <objects>
+                <tabBarController id="DKG-hX-J1p" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UUg-Fh-t6U">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.48567708333333331" alpha="0.5888089817880795" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="SVx-q5-5GN"/>
+                        <segue destination="uMH-z3-fky" kind="relationship" relationship="viewControllers" id="f91-7s-jij"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="38L-It-KP1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-33" y="-1131"/>
+        </scene>
+        <!--Saved-->
+        <scene sceneID="OPw-fp-mMt">
+            <objects>
+                <viewController id="uMH-z3-fky" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Km5-r4-YM0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="UpJ-7P-HUv">
+                                <rect key="frame" x="0.0" y="44" width="414" height="688"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0pB-r7-Xza"/>
+                        <color key="backgroundColor" name="cloudy"/>
+                        <constraints>
+                            <constraint firstItem="UpJ-7P-HUv" firstAttribute="top" secondItem="0pB-r7-Xza" secondAttribute="top" id="C7g-Mc-7j4"/>
+                            <constraint firstItem="UpJ-7P-HUv" firstAttribute="leading" secondItem="0pB-r7-Xza" secondAttribute="leading" id="J7D-9Z-yXB"/>
+                            <constraint firstItem="0pB-r7-Xza" firstAttribute="trailing" secondItem="UpJ-7P-HUv" secondAttribute="trailing" id="L66-yc-xzg"/>
+                            <constraint firstItem="0pB-r7-Xza" firstAttribute="bottom" secondItem="UpJ-7P-HUv" secondAttribute="bottom" id="Qj4-eT-oCG"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Saved" image="bookmark.fill" catalog="system" selectedImage="bookmark.fill" id="MhS-Ia-7ct"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hdv-Dx-edG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="492.75362318840581" y="-321.42857142857139"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="bookmark.fill" catalog="system" width="112" height="128"/>
+        <image name="cloud" catalog="system" width="128" height="88"/>
+        <image name="cloud.fill" catalog="system" width="128" height="88"/>
         <namedColor name="Sunny">
             <color red="0.27843137254901962" green="0.6705882352941176" blue="0.18431372549019609" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="cloudy">
+            <color red="0.32899999618530273" green="0.44299998879432678" blue="0.4779999852180481" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
