@@ -21,8 +21,9 @@ class WeatherForcastViewController: UIViewController {
     @IBOutlet weak var toggleThemButton: UIButton!
     let manager  = CLLocationManager()
     
-    lazy var viewModel = WeatherForcastViewModel(repository: WeatherForcastRepository(), delegate: self)
-    
+    lazy var viewModel = WeatherForcastViewModel(repository: WeatherForcastRepository(),
+                                                 delegate: self,
+                                                 savedWeatherRepository: SavedWeatherRepository())
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewSetUp()
@@ -48,6 +49,7 @@ class WeatherForcastViewController: UIViewController {
     @IBAction private func saveLocationWeather(_ sender: Any) {
         viewModel.saveCurrentWeatherToFavorites()
     }
+    
     @IBAction private func tapped(_ sender: UISwitch) {
         viewModel.toggleTheme(isForest: sender.isOn)
     }
@@ -82,6 +84,10 @@ extension WeatherForcastViewController: CLLocationManagerDelegate {
 }
 
 extension WeatherForcastViewController: WeatherForcastDelegate {
+    func disableSaveButton() {
+        
+    }
+    
     func cloudyTheme() {
         self.view.backgroundColor = Theme.currentTheme.cloudyColour
         self.image.image = Theme.currentTheme.cloudyImage
