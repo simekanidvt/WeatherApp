@@ -115,10 +115,10 @@
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A9o-Qc-INh">
-                                <rect key="frame" x="20" y="49" width="63" height="49.5"/>
+                                <rect key="frame" x="20" y="49" width="48" height="49.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="" imagePadding="0.0">
-                                    <imageReference key="image" image="bookmark" catalog="system" symbolScale="large"/>
+                                    <imageReference key="image" image="bookmark.fill" catalog="system" symbolScale="small"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30" scale="small"/>
                                     <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </buttonConfiguration>
@@ -158,6 +158,7 @@
                         <imageReference key="selectedImage" image="cloud.fill" catalog="system" symbolScale="large"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="bookmarkButton" destination="A9o-Qc-INh" id="Ju3-BE-NK0"/>
                         <outlet property="futureForcastTableView" destination="Z5z-r0-MZy" id="IDl-yu-Oma"/>
                         <outlet property="image" destination="Ov3-rv-boB" id="6jb-3i-KI1"/>
                         <outlet property="largeCurrentTempLabel" destination="Q6T-9a-BR0" id="DqF-Yq-uxC"/>
@@ -223,7 +224,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="bookmark.fill" catalog="system" width="112" height="128"/>
         <image name="cloud" catalog="system" width="128" height="88"/>
         <image name="cloud.fill" catalog="system" width="128" height="88"/>
