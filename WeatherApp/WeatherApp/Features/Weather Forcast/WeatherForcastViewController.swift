@@ -10,6 +10,7 @@ import CoreLocation
 
 class WeatherForcastViewController: UIViewController {
     
+    @IBOutlet private weak var bookmarkButton: UIButton!
     @IBOutlet private weak var largeCurrentTempLabel: UILabel!
     @IBOutlet private weak var smallCurrentTempLabel: UILabel!
     @IBOutlet private weak var maxTempLabel: UILabel!
@@ -79,12 +80,18 @@ extension WeatherForcastViewController: CLLocationManagerDelegate {
             viewModel.retrieveCurrentWeatherFromAPI()
             viewModel.retrieveWeatherForcastFromAPI()
             viewModel.applyTheme(weatherDescription: weatherDescriptionLabel.text ?? "Clear" )
+            bookmarkButton.isEnabled = true
+            self.bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .disabled)
+            self.bookmarkButton.imageView?.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
         }
     }
 }
 
 extension WeatherForcastViewController: WeatherForcastDelegate {
     func disableSaveButton() {
+        self.bookmarkButton.isEnabled = false
+        self.bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .disabled)
+        self.bookmarkButton.imageView?.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
         
     }
     
