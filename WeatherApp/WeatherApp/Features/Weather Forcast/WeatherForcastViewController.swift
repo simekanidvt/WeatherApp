@@ -10,6 +10,7 @@ import CoreLocation
 
 class WeatherForcastViewController: UIViewController {
     
+    @IBOutlet private weak var bookmarkButton: UIButton!
     @IBOutlet private weak var largeCurrentTempLabel: UILabel!
     @IBOutlet private weak var smallCurrentTempLabel: UILabel!
     @IBOutlet private weak var maxTempLabel: UILabel!
@@ -21,8 +22,9 @@ class WeatherForcastViewController: UIViewController {
     @IBOutlet weak var toggleThemButton: UIButton!
     let manager  = CLLocationManager()
     
-    lazy var viewModel = WeatherForcastViewModel(repository: WeatherForcastRepository(), delegate: self)
-    
+    lazy var viewModel = WeatherForcastViewModel(repository: WeatherForcastRepository(),
+                                                 delegate: self,
+                                                 savedWeatherRepository: SavedWeatherRepository())
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewSetUp()
@@ -48,6 +50,7 @@ class WeatherForcastViewController: UIViewController {
     @IBAction private func saveLocationWeather(_ sender: Any) {
         viewModel.saveCurrentWeatherToFavorites()
     }
+    
     @IBAction private func tapped(_ sender: UISwitch) {
         viewModel.toggleTheme(isForest: sender.isOn)
     }
@@ -77,11 +80,21 @@ extension WeatherForcastViewController: CLLocationManagerDelegate {
             viewModel.retrieveCurrentWeatherFromAPI()
             viewModel.retrieveWeatherForcastFromAPI()
             viewModel.applyTheme(weatherDescription: weatherDescriptionLabel.text ?? "Clear" )
+            bookmarkButton.isEnabled = true
+            self.bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .disabled)
+            self.bookmarkButton.imageView?.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
         }
     }
 }
 
 extension WeatherForcastViewController: WeatherForcastDelegate {
+    func disableSaveButton() {
+        self.bookmarkButton.isEnabled = false
+        self.bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .disabled)
+        self.bookmarkButton.imageView?.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
+        
+    }
+    
     func cloudyTheme() {
         self.view.backgroundColor = Theme.currentTheme.cloudyColour
         self.image.image = Theme.currentTheme.cloudyImage

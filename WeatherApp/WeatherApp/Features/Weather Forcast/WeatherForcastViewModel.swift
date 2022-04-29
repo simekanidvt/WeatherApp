@@ -16,6 +16,7 @@ protocol WeatherForcastDelegate : AnyObject {
     func sunnyTheme()
     func rainyTheme()
     func cloudyTheme()
+    func disableSaveButton()
 }
 
 class WeatherForcastViewModel {
@@ -29,12 +30,13 @@ class WeatherForcastViewModel {
     private var repository: WeatherForcastReposirotyType
     private weak var delegate:WeatherForcastDelegate?
     private var weatherForcast: WeatherForcastModel?
-    private var savedWeatherRepository: SavedWeatherRepository?
+    private var savedWeatherRepository: SavedWeatherRepositoryType?
     
-    init(repository: WeatherForcastReposirotyType, delegate: WeatherForcastDelegate) {
+    init(repository: WeatherForcastReposirotyType,
+         delegate: WeatherForcastDelegate, savedWeatherRepository:SavedWeatherRepositoryType) {
         self.repository = repository
         self.delegate = delegate
-        self.savedWeatherRepository = SavedWeatherRepository()
+        self.savedWeatherRepository = savedWeatherRepository
     }
     
     func setLocation(location: CLLocation) {
@@ -115,7 +117,6 @@ class WeatherForcastViewModel {
               let name = currentWeather.name
         else { return }
         
-        
         savedWeatherRepository?.saveLocationWeather(temperature: convertKalvinToCelsius(temperature: temprature) ,
                                                     name: name,
                                                     longitude: String(longitude),
@@ -124,7 +125,7 @@ class WeatherForcastViewModel {
             
             switch(result) {
             case .success(let savedWeather):
-                self?.delegate?.showError()
+                self?.delegate?.disableSaveButton()
             case .failure(let error):
                 self?.delegate?.showError()
             }
